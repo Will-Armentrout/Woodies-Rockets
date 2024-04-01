@@ -221,7 +221,7 @@ for i = 1:length(Pin)
 end
 
 figure(1)
-mdl = scatteredInterpolant(press_chamber', OF', gamma_exit');
+mdl = scatteredInterpolant(press_chamber', OF', areaRatio_exit');
 [xg, yg] = meshgrid(unique(press_chamber), unique(OF));
 zg = mdl(xg, yg);
 surf(xg,yg,zg)

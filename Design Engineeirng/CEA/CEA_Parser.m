@@ -1,7 +1,7 @@
 clear
 clc
 
-out_path = "Output_Test_4.html";
+out_path = "Output_Test_5.html";
 
 output = fileread(out_path);
 
@@ -220,14 +220,15 @@ for i = 1:length(Pin)
     end
 end
 
-figure(1)
-mdl = scatteredInterpolant(press_chamber', OF', areaRatio_exit');
-[xg, yg] = meshgrid(unique(press_chamber), unique(OF));
-zg = mdl(xg, yg);
-surf(xg,yg,zg)
-xlabel('Chamber Pressure (bar)')
-ylabel('O/F Ratio')
-zlabel('Gamma')
+%Uncomment for an error lol
+% figure(1)
+% mdl = scatteredInterpolant(press_chamber', OF', areaRatio_exit');
+% [xg, yg] = meshgrid(unique(press_chamber'), unique(OF'));
+% zg = mdl(xg, yg);
+% surf(xg,yg,zg)
+% xlabel('Chamber Pressure (bar)')
+% ylabel('O/F Ratio')
+% zlabel('Gamma')
     
 
 

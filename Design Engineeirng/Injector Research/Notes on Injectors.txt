@@ -1,0 +1,5 @@
+- Huzel & Huang has detailed walkthrough on dimensions needed for orifice such that we can get all the stuff we need
+- Need to make MATLAB Script so that proper dimensions
+- Model will come after
+- Needs to be able to attach to the combustion chamber of the rocket
+- Will look at the design for Combustion chamber so that I can make the injector plate the right size without having to change size later.

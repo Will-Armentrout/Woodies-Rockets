@@ -3,3 +3,5 @@
 - Model will come after
 - Needs to be able to attach to the combustion chamber of the rocket
 - Will look at the design for Combustion chamber so that I can make the injector plate the right size without having to change size later.
+
+- Update: inner chamber is 35 mm in diameter and overall plate is 76.2 mm Thickness of 15.8

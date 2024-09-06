@@ -1,1 +1,4 @@
-poopie
+git add *
+git commit -m "message"
+git push origin some branch name perhaps
+

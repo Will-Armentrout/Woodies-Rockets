@@ -1,0 +1,41 @@
+\documentclass[12pt, letter paper]{article}
+
+\usepackage{geometry}
+\usepackage{graphics}
+
+\title{Requirements and Calculations of the Rocket Engine}
+\author{Will Armentrout}
+\date{September 15, 2024}
+
+\begin{document}
+	\maketitle
+	
+	\begin{center}
+		\textbf{System Requirements/Specifications}\\
+		\begin{tabular}{|c |c |c |}
+			\hline
+			\textbf{Requirement} & \textbf{Value} & \textbf{From?} \\ \hline
+			Thrust & 900 N & Rocket Weight \\ \hline
+			Specific Impulse & 250 s & Previous Engines using IPA and N2O \\ \hline
+			Tank Pressure & 5127 kPa & Material Characteristic (Vapor Pressure at 20 C) \\ \hline
+			Weight Flow Rate & 3.6 N/s & Calculated \\ \hline
+			
+			
+		\end{tabular}
+	\end{center}
+	\noindent\rule{\linewidth}{0.4pt}
+	\begin{center}
+		\textbf{Deriving the weight flow rate} \\
+	\end{center}
+	Specific Impulse Equation:  $I_{sp} = \frac{T}{\dot{m} g_0} $ 
+	$\rightarrow$
+	Weight Flow Version: $ \dot{W} = \dot{m} g_0= \frac{T}{I_{sp}}$ \\
+	Solve: $ \dot{W} = \frac{900 N}{250 s} = 3.6 N/s $
+	
+	\noindent\rule{\linewidth}{0.4pt}
+	\begin{center}
+		\textbf{Deriving the mass flow rates} \\
+	\end{center}
+
+
+\end{document}

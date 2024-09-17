@@ -1,49 +1,207 @@
 \documentclass[12pt, letter paper]{article}
 
-\usepackage{geometry}
+\usepackage[a4paper, left=0.9in, right=0.9in, top=1in, bottom=1in]{geometry}
 \usepackage{graphics}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
 
-\title{Requirements and Calculations of the Rocket Engine}
+\title{Requirements and Calculations of a Liquid Rocket Engine}
 \author{Will Armentrout}
 \date{September 15, 2024}
 
 \begin{document}
 	\maketitle
+
+	\tableofcontents
 	
+	\section{Nomenclature and Terms}
+		$ N2O $ - Nitrous Oxide \\
+		$ IPA $ - Isopropyl Alcohol \\
+		$I_{sp}$ - Specific Impulse\\
+		$ O/F $ - Oxidizer/Fuel Ratio
+		
+	\section{System Requirements/Specifications}
 	\begin{center}
-		\textbf{System Requirements/Specifications}\\
 		\begin{tabular}{|c |c |c |}
 			\hline
 			\textbf{Requirement} & \textbf{Value} & \textbf{From?} \\ \hline
 			Thrust & 900 N & Rocket Weight \\ \hline
-			Specific Impulse & 250 s & Previous Engines using IPA and N2O \\ \hline
-			Tank Pressure & 5127 kPa & Material Characteristic (Vapor Pressure at 20 C) \\ \hline
-			Weight Flow Rate & 3.6 N/s & Calculated \\ \hline
+			Specific Impulse & 226 s & NASA CEA \\ \hline
+			Tank Pressure & 5.127 MPa & Property (Vapor Pressure: 20 C) \\ \hline
+			O/F Mole Ratio & 9 & Ideal Reaction \\ \hline
+			O/F Mass Ratio & 6.6 & Calculated (O/F Mole Ratio) \\ \hline 
+			Weight Flow Rate & 3.6 N/s & Calculated (Thrust and Isp)\\ \hline
+			Mass Flow Rate & 0.3670 kg/s & Calculated (Weight Flow Rate) \\ \hline
+			Ox Mass Flow Rate & 0.3187 kg/s & Calculated (Mass Flow Rate) \\ \hline
+			Fuel Mass Flow Rate & 0.0483 kg/s & Calculated (Mass Flow Rate) \\ \hline
+			Chamber Pressure & 3 MPa & Assumed (Tank Pressure) \\ \hline
+			Chamber Temperature & 2966 K & NASA CEA \\ \hline
+			Chamber Gas Density & 3.3349 kg/m3 & NASA CEA \\ \hline
+			Chamber Gamma & 1.1459 & NASA CEA \\ \hline
+			Chamber Mach Number & 0.00 & Assumption \\ \hline
+			Chamber SoS & 1015 m/s & NASA CEA \\ \hline
+			Throat Pressure & 1.7248 MPa & NASA CEA \\ \hline
+			Throat Temperature & 2790 K & NASA CEA \\ \hline
+			Throat Gas Density & 2.0577 kg/m3 & NASA CEA \\ \hline
+			Throat Gamma & 1.1471 & NASA CEA \\ \hline
+			Throat Mach Number & 1.00 & Definition \\ \hline
+			Throat SoS & 981 m/s & NASA CEA \\ \hline
+			Exit Pressure & 0.1 MPa & Estimated (Altitude) \\ \hline
+			Exit Temperature & 1907 K & NASA CEA \\ \hline
+			Exit Gas Density & 0.17948 kg/m3 & NASA CEA \\ \hline
+			Exit Gamma & 1.2044 & NASA CEA \\ \hline
+			Exit Mach Number & 2.708 & NASA CEA \\ \hline
+			Exit SoS & 819 m/s & NASA CEA \\ \hline
+			Area Ratio & 5.0683 & NASA CEA \\ \hline
+			C* & 1487 m/s & NASA CEA \\ \hline
+			Specific Gas Constant & 32.4638 g/mol & NASA CEA \\ \hline
+			
+			
+			
+			
 			
 			
 		\end{tabular}
 	\end{center}
-	\noindent\rule{\linewidth}{0.4pt}
-	\begin{center}
-		\textbf{Deriving the weight flow rate} \\
-	\end{center}
-	Specific Impulse Equation:  $I_{sp} = \frac{T}{\dot{m} g_0} $ 
-	$\rightarrow$
-	Weight Flow Version: $ \dot{W} = \dot{m} g_0= \frac{T}{I_{sp}}$ \\
-	Solve: $ \dot{W} = \frac{900 N}{250 s} = 3.6 N/s $
+
+	\section{Derivations, Formulas \& Calculation Process}
+		
+		\subsection{Deriving Oxidizer/Fuel Ratio}
+			Ideal Reaction: 
+			$ C_3H_8O + 9N_2O \rightarrow 3CO_2 + 4H_2O + 9N_2 $ 
+			\begin{center}
+			\textbf{\textit{In reality the reaction is more complicated. the heat of reaction causes many radicals and exotic species that can be calculated but are ignored for simplicity.}} 
+			\end{center}
+			\noindent Mole O/F Ratio of 9 (9 Moles of N2O for 1 mole of C3H8O). \\
+			$ M_{N2O} = 2*14 + 16 = 44 $, 
+			$ M_{C3H8O} = 3*12 + 8*1 + 16 =60 $ \\ \\
+			$O/F_{Mass} = \frac{9*44}{60} = 6.6 $ (6.6 kg of N2O for 1 kg of C3H8O)
+		
+		\subsection{NASA CEA}
+			Once these variables have been determined the NASA CEA (Chemical Equalibrium with Applications) or other equalibrium solver can be used to get many other critical parameters.
+			\subsubsection{Procedure for running the NASA CEA}
+				This is by no means the only way to do it. This is also intended as an early design exercise where other chamber pressures and O/F ratios should be analyzed. 
+				If you just want a single analysis point don't use the interval tabs and just use the number entry on the right side of the tabs for pressure and O/F ratio.
+				\begin{enumerate}
+					\item Look up NASA CEA on any browser. URL: \href{https://cearun.grc.nasa.gov/}{\underline{https://cearun.grc.nasa.gov/}}
+					\item On the right hand side in the chemical equalibrium problem types check "Rocket". Then hit submit.
+					\item On the "Pressure" tab (should be autoselected) enter values for the chamber pressure. 
+						\begin{itemize}
+							\item This will be based on the tank pressure (5.127 MPa) and the losses in the plumbing to the chamber. 
+							\item Since MPa, isn't a selectable option, multiply the MPa number by 10 to get the pressure in bar.
+							\item Assume 3 MPa as an approximate starting point. Since 3 MPa is our goal pressure, input 2 MPa (20 bar) as a Low Value and 5 MPa (50 bar) as a high value. 
+							\item Make the interval smaller, maybe 0.5 MPa (5 bar) to see a range of pressure values. 
+							\item Accept Input and Continue.
+						\end{itemize}
+					\item On the "Fuel(s)" tab check the "Use Periodic Table (mixtures)" since IPA isn't on the quick select list. Accept Fuel Selection and Continue.
+					\item On the "Periodic Table" check Hydrogen, Carbon and Oxygen (as these are the component elements in IPA). Accept Element Selections and Continue.
+					\item On the "Select your Fuel(s)" tab check C3H8O, 2propanol (This is the chemical formula and name for Isopropyl Alcohol). Accept Selected Reactant(s) and Continue. 
+						There should be a confirmation form, Fuel Mix form and Component Properties form. Accept inputs for all and continue to the next form.
+					\item On the "Select your Oxidizer(s)" tab check N2O. Accept Oxidizer Selection and Continue to the next form.
+					\item On the "Enter proportions of Oxidizer/Fuel" on the top selection area select Specify with Oxidizer/Fuel Wt. Ratio. 
+						\begin{itemize}
+							\item We calculated the stoichometric O/F weight ratio earlier as being 6.6. 
+							\item If 6.6 is the target value enter a low value of 4 and a high value of 8 and use an interval of 0.2.
+						\end{itemize}
+					\item On the "Define Exit Conditions" tab define Chamber/Exit Pressure Ratios on the left hand side. 
+						\begin{itemize}
+							\item In rocket engines the most efficient engine is one that is perfectly expanded (meaning the pressure at the exit of the nozzle is at ambient pressures).
+							\item A rocket engine will fly in a multitude of different pressures as it travels upward (pressure decreases with altitude),
+								but for now we will analyze with a exit pressure of 1 bar (or about 110m in altitude) as a baseline.
+							\item In order to get an exit pressure of 1 bar we take our chamber pressure range (2-5 MPa in steps of 0.5 MPa or 20-50 bar in steps of 5 bar) and divide it by the desired exit pressure.
+							\item So for this it's easy. The ratios are just the chamber pressure values. You will have to input each ratio manually (20, 25, 30 ... to 50) on the left column.
+							\item Accept Input and Continue to Next Form.
+						\end{itemize}
+					\item On the "Enter Your Final Choices Before Running CEA" the autogenerated selections should be good (Short, Mass-Fractions, Equilibrium). 
+						You can look at your entered ranges for chamber pressure, O/F ratio and chamber/exit pressure ratios before you run the CEA.
+						Submit Input and Perform CEA Analysis.
+					\item The CEA should run in less than a couple of seconds. The file displayed in the embedded window is the output file. You can download the input and output files in the top right.		
+				\end{enumerate}
+			\subsubsection{Procedure for analyzing the NASA CEA output}
+				The output file of the NASA contains many valuable pieces of information that will be useful in designing a rocket engine later. 
+				A navigation tip: the CEA output file is sorted from smallest to largest O/F ratio first and within each O/F ratio it is sorted by chamber pressure. 
+				\begin{enumerate}
+					\item Scroll through the output file to find the O/F Ratio of 6.6 and the Pin of 3 MPa (435.1 psi). For some reason the CEA output only displays the chamber pressures in psi no matter the input unit.
+					\item Once you have found the section where Pin = 435.1 psi and O/F = 6.6 find the exit condition where the P, bar equals 1.000 or Pinf/P = 30. 
+						\begin{itemize}
+							\item The chamber, throat and exit pressure column where P, BAR = 1.000 (or another exit pressure) are the only columns of interest per section.
+						\end{itemize}
+					\item Find and record the variables of interest.
+						In our case this would be pressure (P), temperature (T), density (RHO), mach number, specific heat ratio (GAMMA), speed of sound (SON VEL), area ratio (Ae/At),
+						c star, specific impulse (Isp) and the mass fractions. Here are the values:
+						\begin{itemize}
+							\item Pressure at the throat: 17.248 Bar
+							\item Temperature in the combustion chamber: 2966 K, throat: 2790 K, exit: 1907 K
+							\item Density of the combustion gases in the combustion chamber: 3.3349 kg/m3, throat 2.0577 kg/m3, exit 0.17948 kg/m3
+							\item Mach Number at exit: 2.708
+							\item Specific Heat Ratio at the combustion chamber: 1.1459, throat: 1.1471, exit: 1.2044
+							\item Speed of Sound at the combustion chamber: 1015 m/s, throat: 981 m/s, exit: 819 m/s
+							\item Area Ratio: 5.0683
+							\item C star: 1487 m/s
+							\item Specific Impulse: 2218 m/s. In order to convert this to the familiar specific impulse with units of seconds divide by the gravitational constant g = 9.81. $ I_{sp} = \frac{2218}{9.81} = 226 s $
+							\item The mass fractions are listed for the main combustion gas products.
+							\begin{itemize}
+								\item CO: Combustion Chamber - 0.05069, Throat -  0.03951, Exit - 0.00258
+								\item CO2: Combustion Chamber - 0.20943, Throat - 0.22700, Exit - 0.28503
+								\item H: Combustion Chamber - 0.00010, Throat -  0.00007, Exit - 0.00000
+								\item HO2: Combustion Chamber - 0.00003, Throat - 0.00002, Exit - 0.00000
+								\item H2: Combustion Chamber - 0.00083, Throat - 0.00065, Exit - 0.00006
+								\item H2O: Combustion Chamber - 0.14328, Throat - 0.14690, Exit - 0.15703
+								\item NO: Combustion Chamber - 0.01266, Throat - 0.00909, Exit - 0.00047
+								\item NO2: Combustion Chamber - 0.00002, Throat - 0.00001, Exit - 0.00000
+								\item N2: Combustion Chamber - 0.54681, Throat - 0.54849, Exit - 0.55252
+								\item O: Combustion Chamber - 0.00151, Throat - 0.00093, Exit - 0.00001
+								\item OH: Combustion Chamber - 0.01160, Throat - 0.00850, Exit - 0.00041
+								\item O2: Combustion Chamber - 0.02302, Throat -  0.01885, Exit - 0.00190
+							\end{itemize}
+						\end{itemize}
+				\end{enumerate}
+			
+		\subsection{Deriving the Flow rates}
+			Specific Impulse Equation:  $I_{sp} = \frac{T}{\dot{m} g_0} $ 
+			$\rightarrow$
+			Weight Flow Version: $ \dot{W} = \dot{m} g_0= \frac{T}{I_{sp}}$ \\
+			Solve: $ \dot{W} = \frac{900 N}{226 s} = 3.982 N/s $ \\ \\
+			Convert to mass flow: $ \dot{m} = \frac{\dot{W}}{g_0} \rightarrow \dot{m} = \frac{3.9823}{9.81} = 0.4059 kg/s $ \\ \\
+			Separate into oxidizer and fuel mass flow rates: \\
+			Oxidizer - Nitrous Oxide: $ \dot{m}_{N2O} = \dot{m} * \frac{6.6}{7.6} = 0.3525 kg/s $ \\
+			Fuel - Isopropyl Alcohol: $ \dot{m}_{IPA} = \dot{m}*\frac{1}{7.6} = 0.0534 kg/s $ \\
 	
-	\noindent\rule{\linewidth}{0.4pt}
-	\begin{center}
-		\textbf{Deriving Oxidizer/Fuel Ratio} \\
-	\end{center}
-	Ideal Reaction: 
-	$ C_3H_8O + 9N_2O \rightarrow 3CO_2 + 4H_2O + 9N_2 $ 
-	\begin{center}
-	\textbf{\textit{In reality the reaction is more complicated. the heat of reaction causes many radicals and exotic species that can be calculated but are ignored for simplicity.}} 
-	\end{center}
-	\noindent O/F Ratio of 9 (9 Moles of N2O for 1 mole of C3H8O). \\
-	$ M_{N2O} = 2*14 + 16 = 44 $ \\
-	$ M_{C3H8O} = 3*12 + 8*1 + 16 =60 $ \\	
-	
+	\section{Design Equations}
+		\subsection{Nozzle Design Equations}
+			\subsubsection{Solving for the specificl gas constant (R)}
+				The Univeral Gas Constant $ \bar{R} $ is 8.314 J/molK. \\
+				The specific gas constant is $ R = \frac{\bar{R}}{M} $ where M is the molecular weight of the mixture of product gases.
+				Need to solve for the molecular weight of all of the component gases and their moles in mass fraction.
+				\begin{itemize}
+					\item CO: $ M = 12 +16 = 28 $ $x_{CO} = 28 \cdot 0.03951 = 1.1063 $ moles
+					\item CO2: $ M = 12 + 16  + 16 = 44 $ $ x_{CO2} = 44 \cdot 0.2270 = 9.988 $ moles
+					\item H: $ M = 1 $ $ x_{H} = 1 \cdot 0.00007 = 0.00007 $ moles
+					\item HO2: $ M = 1 + 16 + 16 = 33 $ $ x_{HO2} = 33 \cdot 0.00002 = 0.00066 $ moles
+					\item H2: $ M = 1 + 1 = 2 $ $ x_{H2} = 2 \cdot 0.00065 = 0.0013 $ moles
+					\item H2O: $ M = 1 + 1 + 16 = 18 $ $ x_{H2O} = 18 \cdot 0.1469 = 2.6442 $ moles
+					\item NO: $ M = 14 + 16 = 30 $ $ x_{NO} = 30 \cdot 0.00909 = 0.2727 $ moles
+					\item NO2: $ M = 14 + 16 + 16 = 46 $ $ x_{NO2} = 46 \cdot 0.00001 = 0.00046 $ moles
+					\item N2: $ M = 14 + 14 = 28 $ $ x_{N2} = 28 \cdot 0.54849 = 15.3577 $ moles
+					\item O: $ M = 16 $ $ x_{O} = 16 \cdot 0.00093 = 0.01488 $ moles
+					\item OH: $ M =16 + 1 = 17 $ $ x_{OH} = 17 \cdot 0.0085 = 0.1445 $ moles
+					\item O2: $ M =16 + 16  = 32 $ $ x_{O2} = 32 \cdot 0.01885 = 0.6032 $ moles
+					\item Total: $ x_{total} = 1.1063 + 9.988 + 0.00007 + 0.00066 + 0.0013 + 2.6442 + 0.2727 + 0.00046 + 15.3577 + 0.01488 + 0.1445 +0.6032 = 30.1346 $ moles
+				\end{itemize}
+				Molecular weight of mixture is $M = 28 \cdot \frac{1.1063}{30.1346} + 44 \cdot \frac{9.988}{30.1346} + 1 \cdot \frac{0.00007}{30.1346} + 33 \cdot \frac{0.00066}{30.1346} + 2 \cdot \frac{0.0013}{30.1346} + 18 \cdot \frac{2.6442}{30.1346} + 30 \cdot \frac{0.2727}{30.1346} + 46 \cdot \frac{0.00046}{30.1346} + 28 \cdot \frac{15.3577}{30.1346} + 16 \cdot \frac{0.01488}{30.1346} + 17 \cdot \frac{0.1445}{30.1346} + 32 \cdot \frac{0.6032}{30.1346} = 32.4638 g/mol$ \\ \\
+				Solve for specific gas constant $ R = \frac{8.314}{32.4638} = 0.2561 J/gK = 256.1 J/kgK $ 
+
+			\subsubsection{Throat Area}
+				Mass Flow Rate at the throat: $ \dot{m} = A_t \frac{P_o}{\sqrt{T_o}}\sqrt{\frac{\gamma}{R}} (\frac{\gamma + 1}{2})^{\frac{\gamma + 1}{2(1-\gamma)}}  $ \\
+				Area of Throat = $ A_t = \frac{\dot{m}\sqrt{T_o}}{P_o}\sqrt{\frac{R}{\gamma}} (\frac{\gamma + 1}{2})^{\frac{\gamma + 1}{2(\gamma -1)}}$ \\ \\
+				Values used in the Equation: \\
+				Mass Flow Rate $ \dot{m} = 0.4059 kg/s $ \\
+				Stagnation Temperature $ T_o = T_{chamber} = 2966 K $ \\
+				Stagnation Pressure $ P_o = P_{chamber} = 3 MPa $ \\
+				Gamma (at the throat) $ \gamma_{throat} = 1.1471 $ \\
+				Specific Gas Constant (at the throat) $ R_{throat} = 256.1 J/kgK $ \\
+			
+
+			
+		
 
 \end{document}

@@ -3,6 +3,7 @@
 \usepackage[a4paper, left=0.9in, right=0.9in, top=1in, bottom=1in]{geometry}
 \usepackage{graphics}
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+\usepackage{gensymb}
 
 \title{Requirements and Calculations of a Liquid Rocket Engine}
 \author{Will Armentrout}
@@ -30,9 +31,9 @@
 			O/F Mole Ratio & 9 & Ideal Reaction \\ \hline
 			O/F Mass Ratio & 6.6 & Calculated (O/F Mole Ratio) \\ \hline 
 			Weight Flow Rate & 3.6 N/s & Calculated (Thrust and Isp)\\ \hline
-			Mass Flow Rate & 0.3670 kg/s & Calculated (Weight Flow Rate) \\ \hline
-			Ox Mass Flow Rate & 0.3187 kg/s & Calculated (Mass Flow Rate) \\ \hline
-			Fuel Mass Flow Rate & 0.0483 kg/s & Calculated (Mass Flow Rate) \\ \hline
+			Mass Flow Rate & 0.4059 kg/s & Calculated (Weight Flow Rate) \\ \hline
+			Ox Mass Flow Rate & 0.3525 kg/s & Calculated (Mass Flow Rate) \\ \hline
+			Fuel Mass Flow Rate & 0.0534 kg/s & Calculated (Mass Flow Rate) \\ \hline
 			Chamber Pressure & 3 MPa & Assumed (Tank Pressure) \\ \hline
 			Chamber Temperature & 2966 K & NASA CEA \\ \hline
 			Chamber Gas Density & 3.3349 kg/m3 & NASA CEA \\ \hline
@@ -54,10 +55,16 @@
 			Area Ratio & 5.0683 & NASA CEA \\ \hline
 			C* & 1487 m/s & NASA CEA \\ \hline
 			Specific Gas Constant & 32.4638 g/mol & NASA CEA \\ \hline
-			
-			
-			
-			
+			Throat Area & $ 65.591 mm^2 $ & Calculated (Isentropic Equations) \\ \hline
+			Throat Diameter & 9.1385 mm & Calculated \\ \hline
+			Exit Area & $ 332.4343 mm^2 $ & Calculated (Area Ratio) \\ \hline
+			Exit Diameter & 20.5734 mm & Calculated \\ \hline
+			Nozzle Exit Angle & 15\degree & Determined (Hobby Rocket Engines)\\ \hline
+			Throat Entry Angle & 30\degree & Determined (Youngblood) \\ \hline
+			Characteristic Length & 1 m & Determined (Youngblood) \\ \hline
+			Chamber Diameter & 30 mm & Determined \\ \hline
+			Chamber Length & 84.36 mm & Calculated (Hobby Rocket Engines) \\ \hline
+			Chamber Wall Thickness & 5 mm & Calculated \& Determined \\ \hline
 			
 			
 		\end{tabular}
@@ -168,7 +175,7 @@
 	
 	\section{Design Equations}
 		\subsection{Nozzle Design Equations}
-			\subsubsection{Solving for the specificl gas constant (R)}
+			\subsubsection{Solving for the specific gas constant}
 				The Univeral Gas Constant $ \bar{R} $ is 8.314 J/molK. \\
 				The specific gas constant is $ R = \frac{\bar{R}}{M} $ where M is the molecular weight of the mixture of product gases.
 				Need to solve for the molecular weight of all of the component gases and their moles in mass fraction.
@@ -187,18 +194,51 @@
 					\item O2: $ M =16 + 16  = 32 $ $ x_{O2} = 32 \cdot 0.01885 = 0.6032 $ moles
 					\item Total: $ x_{total} = 1.1063 + 9.988 + 0.00007 + 0.00066 + 0.0013 + 2.6442 + 0.2727 + 0.00046 + 15.3577 + 0.01488 + 0.1445 +0.6032 = 30.1346 $ moles
 				\end{itemize}
-				Molecular weight of mixture is $M = 28 \cdot \frac{1.1063}{30.1346} + 44 \cdot \frac{9.988}{30.1346} + 1 \cdot \frac{0.00007}{30.1346} + 33 \cdot \frac{0.00066}{30.1346} + 2 \cdot \frac{0.0013}{30.1346} + 18 \cdot \frac{2.6442}{30.1346} + 30 \cdot \frac{0.2727}{30.1346} + 46 \cdot \frac{0.00046}{30.1346} + 28 \cdot \frac{15.3577}{30.1346} + 16 \cdot \frac{0.01488}{30.1346} + 17 \cdot \frac{0.1445}{30.1346} + 32 \cdot \frac{0.6032}{30.1346} = 32.4638 g/mol$ \\ \\
-				Solve for specific gas constant $ R = \frac{8.314}{32.4638} = 0.2561 J/gK = 256.1 J/kgK $ 
+				Molecular weight of mixture is $M = 28 \cdot \frac{1.1063}{30.1346} + 44 \cdot \frac{9.988}{30.1346} + 1 \cdot \frac{0.00007}{30.1346} + 33 \cdot \frac{0.00066}{30.1346} + 2 \cdot \frac{0.0013}{30.1346} + 18 \cdot \frac{2.6442}{30.1346} + 30 \cdot \frac{0.2727}{30.1346} + 46 \cdot \frac{0.00046}{30.1346} + 28 \cdot \frac{15.3577}{30.1346} + 16 \cdot \frac{0.01488}{30.1346} + 17 \cdot \frac{0.1445}{30.1346} + 32 \cdot \frac{0.6032}{30.1346} = 32.4645 g/mol$ \\ \\
+				Solve for specific gas constant $ R = \frac{8.314}{32.4645} = 0.2561 J/gK = 256.1 J/kgK $ 
 
 			\subsubsection{Throat Area}
 				Mass Flow Rate at the throat: $ \dot{m} = A_t \frac{P_o}{\sqrt{T_o}}\sqrt{\frac{\gamma}{R}} (\frac{\gamma + 1}{2})^{\frac{\gamma + 1}{2(1-\gamma)}}  $ \\
-				Area of Throat = $ A_t = \frac{\dot{m}\sqrt{T_o}}{P_o}\sqrt{\frac{R}{\gamma}} (\frac{\gamma + 1}{2})^{\frac{\gamma + 1}{2(\gamma -1)}}$ \\ \\
+				Area of Throat: $ A_t = \frac{\dot{m}\sqrt{T_o}}{P_o}\sqrt{\frac{R}{\gamma}} (\frac{\gamma + 1}{2})^{\frac{\gamma + 1}{2(\gamma -1)}}$ \\ \\
 				Values used in the Equation: \\
 				Mass Flow Rate $ \dot{m} = 0.4059 kg/s $ \\
 				Stagnation Temperature $ T_o = T_{chamber} = 2966 K $ \\
 				Stagnation Pressure $ P_o = P_{chamber} = 3 MPa $ \\
 				Gamma (at the throat) $ \gamma_{throat} = 1.1471 $ \\
-				Specific Gas Constant (at the throat) $ R_{throat} = 256.1 J/kgK $ \\
+				Specific Gas Constant (at the throat) $ R_{throat} = 256.1 J/kgK $ \\ \\
+				Plug in the numbers: $ A_t = \frac{0.4059 \cdot \sqrt{2966}}{3 \cdot 10^6}\sqrt{\frac{256.1}{1.1471}} (\frac{1.1471 + 1}{2})^{\frac{1.1471 + 1}{2(1.1471 -1)}} = 6.5591 \cdot 10^{-5} m^2$ \\ \\
+				Solve for Diameter $ A_t = \pi \frac{{D_t}^2}{4}  \rightarrow D_t = \sqrt{\frac{4A_t}{\pi}} = \sqrt{\frac{4 \cdot (6.5591 \cdot 10^{-5})}{\pi}} = 0.0091385 m = 9.1385 mm$
+			
+			\subsubsection{Exit Area}
+				Use the throat area and determined $ A_e/A_t $ to get the exit area. $ \frac{A_e}{A_t} = 5.0683 $ \\
+				$ A_e = 5.0683 \cdot 6.5591 \cdot 10^{-5} = 3.3243 \cdot 10^{-4} m^2$ \\
+				Diameter: $ D_e = \sqrt{\frac{4 A_e}{\pi}} = \sqrt{\frac{4 \cdot(3.3243 \cdot 10^{-4})}{\pi}} = 0.02057 m = 20.5734 mm $ \\
+			
+			\subsubsection{Nozzle Angles}
+				In normal commercial rocket engines the nozzle angle is optimized so that when the flow leaves it is as 1D as possible, to achieve max thrust. 
+				The profile that maximizes thrust for a certain throat area and length is called an "Rao optimum contour". This is is named after G.V.R Rao and is complicated to manufacture. 
+				Because of its complexity we will just use a 15{\degree} conical nozzle profile, common for hobby and small area ratio engines. It has 98.3\% of the performance of an ideal nozzle, so close enough for me.
+
+		\subsection{Combustion Chamber Equations}
+			
+			\subsubsection{Chamber Length}
+				For the combustion chamber Hobby Rocket Engines references a combustion chamber with a cross sectional area of at least 3 times the throat area. 
+				For this reason we choose a chamber diameter of 30 mm, much larger than the required size, subject to change based on the injector. \\ \\
+				The chamber volume required for complete combustion is defined by the characteristic chamber length: $ L^* = V_c/A_t \rightarrow L^* A_t = V_c $ where $ V_c = A_c L_c +$ convergent volume  \\
+				Youngblood references a characterisitc length of 1m being successful in nitrous, ethanol engines so that value will be used as a minimum. \\ \\
+				For small combustion chambers the convergent volume is 1/10th the cylindrical portion so $V_c = 1.1A_cL_c $ \\
+				Combine Equations $ L^* A_t = 1.1A_cL_c \rightarrow L_c = \frac{L^* A_t}{1.1A_c} = \frac{(1) (6.5591 \cdot 10^{-5})}{1.1(\pi \frac{0.03^2}{4})} = 0.08436 m$ or $ 84.36 mm $
+			
+			\subsubsection{Chamber Thickness}
+				This system will definitely not be thin walled but it is a good starting point for minimums. \\
+				The axial or longnitudinal stress in a thin walled pressure vessel is given by the equation: 
+				$ \sigma_a = \frac{Pr}{2t} $ Where P is the pressure, r is radius and t is the thickness. \\ \\
+				Rrearrange for thickness: $ t = \frac{Pr}{2\sigma_a} $ In our case pressure is the chamber pressure (3 MPa), radius is 15 mm and sigma is material dependent. 
+				Since steel is cheap we will use that, heat transfer be damned (hopefully we don't run it for long enough). Steel rod stock on McMaster has a tensile yield stress of 60,000 psi or 413.685 MPa. \\
+				Plug this in:  $ t = \frac{3 \cdot 15}{2 \cdot 413.685} = 0.054389 mm $ 
+				Remember this number is at ambient temperatures and the combustion chamber gas were calculated to be at 2966 K (Above the melting point of steel). \\ \\
+				Recalculating with an operating temperature of 500{\degree}C or 773.15 K steel has about 40\% of it's yield strength at 21C. Using this: $ t = \frac{3 \cdot 15}{2 \cdot(0.4) (413.685) \cdot} = 0.13597 mm $ \\
+				Not really much of a worry, but let's use something thick enough to handle the heat loads as well, call the wall thickness 5mm.
 			
 
 			

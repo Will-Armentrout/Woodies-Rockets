@@ -1,0 +1,6 @@
+%Plug in values
+rho = XX; %density 
+g = 32.2; %ft/s^2 accel. due to gravity
+dP = 100; %psi
+v = 150; %
+Cd = v / sqrt(2*g*(dP/rho)); %should be between 0.5 and 0.7

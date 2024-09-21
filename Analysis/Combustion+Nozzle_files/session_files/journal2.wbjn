@@ -1,0 +1,21 @@
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+system1 = GetSystem(Name="Geometry")
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsDiscoveryGeometry=True)
+geometryProperties1 = geometry1.GetGeometryProperties()
+geometryProperties1.GeometryImportComparePartsOnUpdate = "ComparePartsMethod_Associatively"
+Update()
+system2 = GetSystem(Name="FFF")
+setup1 = system2.GetContainer(ComponentName="Setup")
+setup1.SendCommand(Command='(cx-gui-do cx-activate-tab-index "NavigationPane*Frame1(TreeTab)" 0)(cx-gui-do cx-activate-tab-index "NavigationPane*Frame1(TreeTab)" 1)')
+setup1.SendCommand(Command='/file/set-tui-version "24.2"')
+geometryComponent1 = system1.GetComponent(Name="Geometry")
+geometryComponent1.Update(AllDependencies=True)
+geometryComponent1.UpdateUpstreamComponents()
+mesh1 = system2.GetContainer(ComponentName="Mesh")
+mesh1.Edit()
+geometry1.Exit()
+mesh1.Exit()
+Save(Overwrite=True)

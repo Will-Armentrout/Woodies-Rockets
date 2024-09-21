@@ -1,0 +1,99 @@
+Transcript Start Time:  00:53:35, 21 Sep 2024 Eastern Daylight Time 
+Current Directory: "C:\WINDOWS\system32"
+
+Build Time: May 13 2024 11:24:49 EST 
+Executable Path: C:/PROGRA~1/ANSYSI~1/ANSYSS~1/v242/fluent/ntbin/win64/fluent.exe
+
+---------------------------------------------------------------------------------------
+ID    Hostname         Core  O.S.         PID    Vendor                               
+---------------------------------------------------------------------------------------
+n0*   DESKTOP-7DL4VB7  1/16  Windows-x64  19712  AMD Ryzen 7 7700X 8-Core Processor   
+host  DESKTOP-7DL4VB7        Windows-x64  22756  AMD Ryzen 7 7700X 8-Core Processor   
+
+MPI Option Selected: intel
+Selected system interconnect: default
+---------------------------------------------------------------------------------------
+
+Cortex Process ID: 11300 
+License Server Path: () 
+Multicore SMT processors detected. Processor affinity set!
+Reading "C:\Users\Will\Documents\Woodies-Rockets\Analysis\Combustion+Nozzle_files\dp0\FFF\MECH\FFF.msh"...
+Buffering for file scan...
+
+    1258 nodes, binary.
+     794 nodes, binary.
+     794 mixed wall faces, zone  1, binary.
+    4503 mixed interior faces, zone  2, binary.
+    1645 mixed cells, zone  3, binary.
+
+Building...
+     mesh
+     materials,
+     interface,
+     domains,
+     zones,
+	geom_fluid_volume
+	interior-geom_fluid_volume
+	wall-geom_fluid_volume
+     parallel,
+Done.
+
+Preparing mesh for display...
+Done.
+
+Writing Settings file "C:\Users\Will\Documents\Woodies-Rockets\Analysis\Combustion+Nozzle_files\dp0\FFF\Fluent\FFF.set"...
+	writing rp variables ... Done.
+	writing domain variables ... Done.
+	writing geom_fluid_volume (type fluid) (mixture) ... Done.
+	writing wall-geom_fluid_volume (type wall) (mixture) ... Done.
+	writing interior-geom_fluid_volume (type interior) (mixture) ... Done.
+	writing zones map name-id ... Done.
+Initialization based on settings...
+
+Initialize using the hybrid initialization method.
+
+Checking case topology... 
+-This case has no inlets & no outlets 
+-Case will be initialized with constant parameters
+
+Hybrid initialization is done.
+Writing data to C:\\Users\\Will\\Documents\\Woodies-Rockets\\Analysis\\Combustion+Nozzle_files\\dp0\\FFF\\Fluent\\FFF.ip ...
+	x-coord
+	y-coord
+	z-coord
+	pressure
+	x-velocity
+	y-velocity
+	z-velocity
+	k
+	omega
+	hyb_init-0
+	hyb_init-1
+Done.
+("Unable to update solution. Number of iterations should be greater than zero.")
+
+Error: Unable to update solution. Number of iterations should be greater than zero.
+Error Object: #f
+
+Performance Timer for 0 iterations on 1 compute node
+  Average wall-clock time per iteration:                0.000 sec
+  Global reductions per iteration:                          0 ops
+  Global reductions time per iteration:                 0.000 sec (0.0%)
+  Message count per iteration:                              0 messages
+  Data transfer per iteration:                          0.000 MB
+  LE solves per iteration:                                  0 solves
+  LE wall-clock time per iteration:                     0.000 sec (0.0%)
+  LE global solves per iteration:                           0 solves
+  LE global wall-clock time per iteration:              0.000 sec (0.0%)
+  LE global matrix maximum size:                            0
+  AMG cycles per iteration:                             0.000 cycles
+  Relaxation sweeps per iteration:                          0 sweeps
+  Relaxation exchanges per iteration:                       0 exchanges
+  LE early protections (stall) per iteration:           0.000 times
+  LE early protections (divergence) per iteration:      0.000 times
+  Total SVARS touched:                                    382
+
+  Total wall-clock time:                                0.000 sec
+
+Transcript Stop Time:  00:53:44, 21 Sep 2024 Eastern Daylight Time 
+Total Transcript Time: 0 Minute 9 Second.

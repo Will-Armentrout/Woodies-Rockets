@@ -1,5 +1,5 @@
-Transcript Start Time:  00:53:35, 21 Sep 2024 Eastern Daylight Time 
-Current Directory: "C:\WINDOWS\system32"
+Transcript Start Time:  12:02:55, 21 Sep 2024 Eastern Daylight Time 
+Current Directory: "C:\Users\Will"
 
 Build Time: May 13 2024 11:24:49 EST 
 Executable Path: C:/PROGRA~1/ANSYSI~1/ANSYSS~1/v242/fluent/ntbin/win64/fluent.exe
@@ -7,14 +7,14 @@ Executable Path: C:/PROGRA~1/ANSYSI~1/ANSYSS~1/v242/fluent/ntbin/win64/fluent.ex
 ---------------------------------------------------------------------------------------
 ID    Hostname         Core  O.S.         PID    Vendor                               
 ---------------------------------------------------------------------------------------
-n0*   DESKTOP-7DL4VB7  1/16  Windows-x64  19712  AMD Ryzen 7 7700X 8-Core Processor   
-host  DESKTOP-7DL4VB7        Windows-x64  22756  AMD Ryzen 7 7700X 8-Core Processor   
+n0*   DESKTOP-7DL4VB7  1/16  Windows-x64  2472   AMD Ryzen 7 7700X 8-Core Processor   
+host  DESKTOP-7DL4VB7        Windows-x64  23520  AMD Ryzen 7 7700X 8-Core Processor   
 
 MPI Option Selected: intel
 Selected system interconnect: default
 ---------------------------------------------------------------------------------------
 
-Cortex Process ID: 11300 
+Cortex Process ID: 18944 
 License Server Path: () 
 Multicore SMT processors detected. Processor affinity set!
 Reading "C:\Users\Will\Documents\Woodies-Rockets\Analysis\Combustion+Nozzle_files\dp0\FFF\MECH\FFF.msh"...
@@ -48,6 +48,8 @@ Writing Settings file "C:\Users\Will\Documents\Woodies-Rockets\Analysis\Combusti
 	writing wall-geom_fluid_volume (type wall) (mixture) ... Done.
 	writing interior-geom_fluid_volume (type interior) (mixture) ... Done.
 	writing zones map name-id ... Done.
+"Updating Setup cell..."
+"Updating Solution cell..."
 Initialization based on settings...
 
 Initialize using the hybrid initialization method.
@@ -95,5 +97,5 @@ Performance Timer for 0 iterations on 1 compute node
 
   Total wall-clock time:                                0.000 sec
 
-Transcript Stop Time:  00:53:44, 21 Sep 2024 Eastern Daylight Time 
-Total Transcript Time: 0 Minute 9 Second.
+Transcript Stop Time:  12:03:02, 21 Sep 2024 Eastern Daylight Time 
+Total Transcript Time: 0 Minute 7 Second.

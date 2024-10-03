@@ -5,7 +5,7 @@ clear
 thrust = 900;
 mass = 30;
 g = 9.81;
-burn_time = 8;
+burn_time = 7;
 
 fs = 100;
 
